@@ -6,21 +6,14 @@
 
 @layer base {
   :root {
-    /* Ocean Color Palette */
-    --color-ocean-deep: #082f49;
-    --color-ocean-primary: #0369a1;
-    --color-ocean-light: #38bdf8;
-    --color-ocean-mist: #bae6fd;
-
-    /* Navy Palette */
-    --color-navy-dark: #0f172a;
-    --color-navy-medium: #334155;
-    --color-navy-light: #64748b;
-
-    /* Accent Colors */
-    --color-coral: #fb7185;
-    --color-gold: #fbbf24;
-    --color-seafoam: #6ee7b7;
+    /* Cruise Globe Brand Colors */
+    --color-cruise-dark: #0E1B2B;
+    --color-cruise-navy: #152238;
+    --color-cruise-panel: #1A2942;
+    --color-cruise-border: #2A3F5F;
+    --color-cruise-accent: #00B4D8;
+    --color-cruise-highlight: #0096C7;
+    --color-cruise-gold: #FFD700;
 
     /* Spacing */
     --spacing-touch-target: 48px;
@@ -31,10 +24,9 @@
   }
 
   body {
-    @apply bg-gradient-to-br from-ocean-50 via-white to-ocean-100 min-h-screen;
-    @apply text-navy-900 font-sans;
-    font-size: 18px;
-    line-height: 1.6;
+    @apply bg-cruise-dark text-white font-sans;
+    font-size: 16px;
+    line-height: 1.5;
   }
 
   h1,
@@ -47,87 +39,111 @@
   }
 
   h1 {
-    @apply text-4xl;
-  }
-
-  h2 {
     @apply text-3xl;
   }
 
-  h3 {
+  h2 {
     @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
   }
 }
 
 @layer components {
 
-  /* Glass Card Effect */
-  .glass-card {
-    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl;
+  /* Cruise Panel Card */
+  .cruise-panel {
+    @apply bg-cruise-panel border border-cruise-border rounded-xl;
   }
 
-  /* Ocean Gradient */
-  .ocean-gradient {
-    @apply bg-gradient-to-br from-ocean-600 via-ocean-500 to-ocean-400;
+  /* Glass Card Effect for light sections */
+  .glass-card {
+    @apply bg-white/90 backdrop-blur-lg border border-gray-200 shadow-lg;
+  }
+
+  /* Dark Glass Card for dark sections */
+  .dark-glass-card {
+    @apply bg-cruise-panel/80 backdrop-blur-lg border border-cruise-border;
+  }
+
+  /* Ocean Gradient - Updated for cruise theme */
+  .cruise-gradient {
+    @apply bg-gradient-to-br from-cruise-accent via-cruise-highlight to-cruise-accent;
   }
 
   /* Touch-friendly Button */
   .btn-touch {
-    @apply min-h-[48px] min-w-[48px] px-6 py-3 rounded-2xl font-medium;
+    @apply min-h-[44px] min-w-[44px] px-5 py-2.5 rounded-xl font-medium;
     @apply transition-all duration-200 active:scale-95;
   }
 
   .btn-primary {
-    @apply btn-touch ocean-gradient text-white shadow-lg;
-    @apply hover:shadow-xl hover:brightness-110;
+    @apply btn-touch bg-cruise-accent text-white shadow-lg;
+    @apply hover:bg-cruise-highlight hover:shadow-xl;
   }
 
   .btn-secondary {
-    @apply btn-touch bg-white/90 text-ocean-700 border-2 border-ocean-200;
-    @apply hover:bg-ocean-50 hover:border-ocean-300;
+    @apply btn-touch bg-cruise-panel text-white border border-cruise-border;
+    @apply hover:bg-cruise-navy hover:border-cruise-accent;
+  }
+
+  .btn-outline {
+    @apply btn-touch bg-transparent text-white border border-cruise-border;
+    @apply hover:bg-cruise-panel hover:border-cruise-accent;
   }
 
   /* Card Hover Effect */
   .card-interactive {
     @apply cursor-pointer transition-all duration-300;
-    @apply hover:scale-[1.02] hover:shadow-2xl;
+    @apply hover:border-cruise-accent hover:shadow-lg hover:shadow-cruise-accent/20;
   }
 
   /* Photo Container */
   .photo-container {
-    @apply relative overflow-hidden rounded-2xl;
-    @apply aspect-[4/3] bg-gradient-to-br from-ocean-100 to-ocean-200;
+    @apply relative overflow-hidden rounded-xl;
+    @apply aspect-[4/3] bg-gradient-to-br from-cruise-navy to-cruise-panel;
   }
 
   /* Input Field */
   .input-field {
-    @apply w-full px-4 py-3 rounded-xl border-2 border-ocean-200;
-    @apply bg-white/90 text-navy-900 text-lg;
-    @apply focus:outline-none focus:border-ocean-500 focus:ring-2 focus:ring-ocean-200;
+    @apply w-full px-4 py-3 rounded-xl border border-cruise-border;
+    @apply bg-cruise-panel text-white text-base;
+    @apply focus:outline-none focus:border-cruise-accent focus:ring-2 focus:ring-cruise-accent/30;
     @apply transition-all duration-200;
+    @apply placeholder:text-white/40;
   }
 
   /* Tag Pill */
   .tag-pill {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full;
-    @apply bg-ocean-100 text-ocean-800 text-base font-medium;
-    @apply border border-ocean-200;
-  }
-
-  /* Progress Ring */
-  .progress-ring {
-    @apply relative inline-flex items-center justify-center;
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full;
+    @apply bg-cruise-accent/20 text-cruise-accent text-sm font-medium;
+    @apply border border-cruise-accent/30;
   }
 
   /* Floating Action Button */
   .fab {
-    @apply fixed bottom-6 right-6 z-50;
-    @apply w-16 h-16 rounded-full ocean-gradient;
+    @apply fixed bottom-24 right-6 z-50;
+    @apply w-14 h-14 rounded-full bg-cruise-accent;
     @apply flex items-center justify-center;
-    @apply shadow-2xl cursor-pointer;
+    @apply shadow-2xl shadow-cruise-accent/30 cursor-pointer;
     @apply transition-all duration-300;
-    @apply hover:scale-110 hover:shadow-ocean-500/50;
+    @apply hover:scale-110 hover:bg-cruise-highlight;
     @apply active:scale-95;
+  }
+
+  /* Stat Card */
+  .stat-card {
+    @apply cruise-panel p-4 text-center;
+  }
+
+  .stat-value {
+    @apply text-2xl font-bold text-cruise-accent;
+  }
+
+  .stat-label {
+    @apply text-sm text-white/60 mt-1;
   }
 }
 
@@ -149,8 +165,8 @@
   }
 
   /* Text Gradient */
-  .text-ocean-gradient {
-    @apply bg-gradient-to-r from-ocean-600 to-ocean-400 bg-clip-text text-transparent;
+  .text-cruise-gradient {
+    @apply bg-gradient-to-r from-cruise-accent to-cruise-highlight bg-clip-text text-transparent;
   }
 
   /* Safe Area for Mobile */
@@ -193,4 +209,28 @@
 
 .animate-spin-slow {
   animation: spin-slow 3s linear infinite;
+}
+
+/* Mapbox customization */
+.mapboxgl-ctrl-top-right {
+  top: 60px !important;
+}
+
+.mapboxgl-popup-content {
+  @apply bg-cruise-navy text-white rounded-lg shadow-xl border border-cruise-border;
+  padding: 12px 16px;
+}
+
+.mapboxgl-popup-tip {
+  border-top-color: #152238 !important;
+}
+
+/* Port Marker */
+.port-marker {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.port-marker:hover {
+  transform: scale(1.2);
 }

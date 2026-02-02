@@ -15,7 +15,7 @@ function App() {
 
     return (
         <Router>
-            <div className="min-h-screen pb-20 safe-area-bottom">
+            <div className="min-h-screen">
                 <Routes>
                     <Route path="/" element={<Home user={user} cruises={cruises} />} />
                     <Route

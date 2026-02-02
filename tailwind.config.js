@@ -7,6 +7,17 @@ export default {
     theme: {
         extend: {
             colors: {
+                // Cruise Globe brand colors from reference
+                cruise: {
+                    dark: '#0E1B2B',      // Dark navy background
+                    navy: '#152238',      // Slightly lighter navy
+                    panel: '#1A2942',     // Panel backgrounds
+                    border: '#2A3F5F',    // Border color
+                    accent: '#00B4D8',    // Teal accent
+                    highlight: '#0096C7', // Darker teal
+                    gold: '#FFD700',      // Gold for highlights
+                    coral: '#FF6B6B',     // Coral for alerts
+                },
                 ocean: {
                     50: '#f0f9ff',
                     100: '#e0f2fe',
@@ -36,7 +47,8 @@ export default {
             },
             fontFamily: {
                 sans: ['Inter', 'system-ui', 'sans-serif'],
-                display: ['Outfit', 'Inter', 'sans-serif'],
+                display: ['Montserrat', 'Outfit', 'Inter', 'sans-serif'],
+                brand: ['Montserrat', 'sans-serif'],
             },
             fontSize: {
                 // 大字體適合年長用戶

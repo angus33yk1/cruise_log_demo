@@ -5,20 +5,31 @@ import Header from '../components/Header';
 import PhotoGallery from '../components/PhotoGallery';
 import { formatDate, getCruiseDuration } from '../utils/dateUtils';
 
+// SVG Icons
+const PlusIcon = () => (
+    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+    </svg>
+);
+
 export default function DiaryTimeline({ cruises }) {
     const { cruiseId } = useParams();
     const cruise = cruises.find(c => c.id === cruiseId);
     const [selectedDay, setSelectedDay] = useState(null);
 
     if (!cruise) {
-        return <div className="p-6">Cruise not found</div>;
+        return (
+            <div className="p-6 min-h-screen bg-cruise-dark text-white">
+                Cruise not found
+            </div>
+        );
     }
 
     const duration = getCruiseDuration(cruise.dates.embark, cruise.dates.disembark);
     const days = Array.from({ length: duration }, (_, i) => i + 1);
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-cruise-dark pb-24">
             <Header
                 title={cruise.ship}
                 subtitle={`${formatDate(cruise.dates.embark, 'short')} - ${formatDate(cruise.dates.disembark, 'short')}`}
@@ -32,10 +43,10 @@ export default function DiaryTimeline({ cruises }) {
                     alt={cruise.ship}
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-cruise-dark via-transparent to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 text-white">
                     <h2 className="text-3xl font-display font-bold mb-2">{cruise.ship}</h2>
-                    <p className="text-lg opacity-90">{cruise.line}</p>
+                    <p className="text-lg text-white/90">{cruise.line}</p>
                 </div>
             </div>
 
@@ -52,16 +63,16 @@ export default function DiaryTimeline({ cruises }) {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: dayNum * 0.05 }}
-                                className="glass-card rounded-3xl overflow-hidden"
+                                className="cruise-panel rounded-2xl overflow-hidden"
                             >
                                 <div className="p-5">
                                     {/* Day Header */}
                                     <div className="flex items-center justify-between mb-4">
                                         <div>
-                                            <h3 className="text-xl font-display font-semibold text-navy-900">
+                                            <h3 className="text-xl font-display font-semibold text-white">
                                                 Day {dayNum}
                                             </h3>
-                                            <p className="text-base text-navy-600">
+                                            <p className="text-base text-white/60">
                                                 {port?.name}, {port?.country}
                                             </p>
                                         </div>
@@ -75,13 +86,13 @@ export default function DiaryTimeline({ cruises }) {
                                     {diaryEntry ? (
                                         <div className="space-y-4">
                                             {diaryEntry.title && (
-                                                <h4 className="text-lg font-semibold text-navy-800">
+                                                <h4 className="text-lg font-semibold text-cruise-accent">
                                                     {diaryEntry.title}
                                                 </h4>
                                             )}
 
                                             {diaryEntry.text && (
-                                                <p className="text-base text-navy-700 leading-relaxed">
+                                                <p className="text-base text-white/80 leading-relaxed">
                                                     {diaryEntry.text}
                                                 </p>
                                             )}
@@ -105,8 +116,8 @@ export default function DiaryTimeline({ cruises }) {
                                         </div>
                                     ) : (
                                         <div className="text-center py-6">
-                                            <p className="text-navy-500 mb-3">No memories yet for this day</p>
-                                            <button className="btn-secondary text-sm">
+                                            <p className="text-white/50 mb-3">No memories yet for this day</p>
+                                            <button className="btn-secondary text-sm py-2 px-4">
                                                 Add Memory
                                             </button>
                                         </div>
@@ -120,9 +131,7 @@ export default function DiaryTimeline({ cruises }) {
 
             {/* Floating Add Button */}
             <button className="fab">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
+                <PlusIcon />
             </button>
         </div>
     );
