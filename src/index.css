@@ -1,0 +1,196 @@
+@import 'mapbox-gl/dist/mapbox-gl.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Ocean Color Palette */
+    --color-ocean-deep: #082f49;
+    --color-ocean-primary: #0369a1;
+    --color-ocean-light: #38bdf8;
+    --color-ocean-mist: #bae6fd;
+
+    /* Navy Palette */
+    --color-navy-dark: #0f172a;
+    --color-navy-medium: #334155;
+    --color-navy-light: #64748b;
+
+    /* Accent Colors */
+    --color-coral: #fb7185;
+    --color-gold: #fbbf24;
+    --color-seafoam: #6ee7b7;
+
+    /* Spacing */
+    --spacing-touch-target: 48px;
+  }
+
+  * {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-gradient-to-br from-ocean-50 via-white to-ocean-100 min-h-screen;
+    @apply text-navy-900 font-sans;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-semibold;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+}
+
+@layer components {
+
+  /* Glass Card Effect */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl;
+  }
+
+  /* Ocean Gradient */
+  .ocean-gradient {
+    @apply bg-gradient-to-br from-ocean-600 via-ocean-500 to-ocean-400;
+  }
+
+  /* Touch-friendly Button */
+  .btn-touch {
+    @apply min-h-[48px] min-w-[48px] px-6 py-3 rounded-2xl font-medium;
+    @apply transition-all duration-200 active:scale-95;
+  }
+
+  .btn-primary {
+    @apply btn-touch ocean-gradient text-white shadow-lg;
+    @apply hover:shadow-xl hover:brightness-110;
+  }
+
+  .btn-secondary {
+    @apply btn-touch bg-white/90 text-ocean-700 border-2 border-ocean-200;
+    @apply hover:bg-ocean-50 hover:border-ocean-300;
+  }
+
+  /* Card Hover Effect */
+  .card-interactive {
+    @apply cursor-pointer transition-all duration-300;
+    @apply hover:scale-[1.02] hover:shadow-2xl;
+  }
+
+  /* Photo Container */
+  .photo-container {
+    @apply relative overflow-hidden rounded-2xl;
+    @apply aspect-[4/3] bg-gradient-to-br from-ocean-100 to-ocean-200;
+  }
+
+  /* Input Field */
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-ocean-200;
+    @apply bg-white/90 text-navy-900 text-lg;
+    @apply focus:outline-none focus:border-ocean-500 focus:ring-2 focus:ring-ocean-200;
+    @apply transition-all duration-200;
+  }
+
+  /* Tag Pill */
+  .tag-pill {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full;
+    @apply bg-ocean-100 text-ocean-800 text-base font-medium;
+    @apply border border-ocean-200;
+  }
+
+  /* Progress Ring */
+  .progress-ring {
+    @apply relative inline-flex items-center justify-center;
+  }
+
+  /* Floating Action Button */
+  .fab {
+    @apply fixed bottom-6 right-6 z-50;
+    @apply w-16 h-16 rounded-full ocean-gradient;
+    @apply flex items-center justify-center;
+    @apply shadow-2xl cursor-pointer;
+    @apply transition-all duration-300;
+    @apply hover:scale-110 hover:shadow-ocean-500/50;
+    @apply active:scale-95;
+  }
+}
+
+@layer utilities {
+
+  /* Smooth Scroll */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+
+  /* Hide Scrollbar */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Text Gradient */
+  .text-ocean-gradient {
+    @apply bg-gradient-to-r from-ocean-600 to-ocean-400 bg-clip-text text-transparent;
+  }
+
+  /* Safe Area for Mobile */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Custom Animations */
+@keyframes wave {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-wave {
+  animation: wave 3s ease-in-out infinite;
+}
+
+/* Loading Spinner */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
